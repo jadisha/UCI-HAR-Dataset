@@ -33,10 +33,13 @@ data <- rbind(train,test)
 
 #2 Extracts only the measurements on the mean and standard deviation for each measurement.
 
-measure_df <- mutate(data, subject_mean = mean(data$"subject"), target_mean = mean(data$"target"))
+#select just mean, std measures
+sub_data <- data[,grepl("subject|target|mean|std",names(data))];
+
+#measure_df <- mutate(data, subject_mean = mean(data$"subject"), target_mean = mean(data$"target"))
 
 #3 Uses descriptive activity names to name the activities in the data set
-des_data <- merge(data,activity_labels,"target")
+des_data <- merge(sub_data,activity_labels,"target")
 
 #4 Appropriately labels the data set with descriptive variable names. 
 names(des_data)<-gsub("Acc","Accelerometer",names(des_data))
@@ -48,11 +51,11 @@ names(des_data)<-gsub("tBody", "TimeBody", names(des_data))
 names(des_data)<-gsub("^f", "Frequency", names(des_data))
 names(des_data)<-gsub("^t", "Time", names(des_data))
 names(des_data)[1]<-"code"
-names(des_data)[564]<-"activity"
+names(des_data)[82]<-"activity"
 
 #5
 tidy_data <- aggregate(des_data,list(des_data$subject,des_data$activity),mean,na.action = na.omit)
-write.table(tidy_data, "DataSet.txt", row.name=FALSE)
+write.table(tidy_data, "FinalDataSet.txt", row.name=FALSE)
 
 str(tidy_data)
 
