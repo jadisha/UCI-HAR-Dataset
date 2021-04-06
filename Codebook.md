@@ -66,10 +66,10 @@ subject_train
 #Merges the training and the test sets to create one data set
 data <- rbind(train,test)
 #Extracts only the measurements on the mean and standard deviation for each measurement.
-measure_df <- mutate()
+sub_data <- grepl()
 #Uses descriptive activity names to name the activities in the data set
 des_data <- merge()
-#Create a tidy data set with the average of each variable for each activity and each subject. 
+#Create a tidy data set with the average of each variable for each activity and each subject.
 tidy_data <- aggregate()
 
 ##Sources
